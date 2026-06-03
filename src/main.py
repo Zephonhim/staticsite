@@ -1,13 +1,12 @@
 from textnode import *
 import os
 import shutil
+from gencontent import *
 
 def main():
 
-    print("hello world")
-    Node = TextNode("This is some anchor text", TextType.LINK, "https://www.boot.dev")
-    print(f"{Node}")
-
+    copy_directory("static", "public")
+    generate_page("content/index.md", "template.html", "public/index.html",)
 
 def copy_directory(source, destination):
     
@@ -22,6 +21,6 @@ def copy_directory(source, destination):
         else:
             copy_directory(source_path, destination_path)
                 
-copy_directory("static", "public")
+
 
 main()
