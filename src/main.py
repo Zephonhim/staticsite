@@ -2,11 +2,16 @@ from textnode import *
 import os
 import shutil
 from gencontent import *
+import sys
 
 def main():
 
-    copy_directory("static", "public")
-    generate_pages_recursive("content", "template.html", "public",)
+    basepath = "/"
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+
+    copy_directory("static", "docs")
+    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 def copy_directory(source, destination):
     
