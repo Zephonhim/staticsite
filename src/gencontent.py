@@ -24,3 +24,14 @@ def generate_page(from_path, template_path, dest_path):
 
     with open(dest_path, "w") as file:
         file.write(page)
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    content = os.listdir(dir_path_content)
+    for each in content:
+        each_path = os.path.join(dir_path_content, each)
+        dest_each_path = os.path.join(dest_dir_path, each)
+        if os.path.isfile(each_path) and each_path[-3:] == ".md":
+            dest_each_html = dest_each_path.replace(".md", ".html")
+            generate_page(each_path, template_path, dest_each_html)
+        else :
+            generate_pages_recursive(each_path, template_path, dest_each_path)
